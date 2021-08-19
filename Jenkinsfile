@@ -4,9 +4,27 @@ pipeline {
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "maven"
+
     }
 
     stages {
+stage('Test'){
+for(int i=0;i<2;i++){
+stage "Stage#" + i
+print 'hello, world!'
+
+if(i==0){
+git "https://github.com/Surabhi-Basak/bankappgradle.git"
+echo "Running on Stage#0"
+}
+else{
+build "bankapp"
+echo "Running on Stage#1"
+}
+}
+}
+
+
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
